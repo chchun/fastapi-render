@@ -1,9 +1,3 @@
-
----
-
-### 🔑 4. `keyvalue.py`
-
-```python
 import os, json
 from redis import from_url
 from pydantic import BaseModel
