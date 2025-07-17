@@ -1,17 +1,16 @@
-# FastAPI + PostgreSQL + Redis (Key‑Value) 예제
+# 🔐 FastAPI + Render Key‑Value (Redis® 호환) 예제
 
 ## 🚀 기능
-- PostgreSQL `User` 테이블에 사용자 정보 저장
-- Redis(Key‑Value)에 JSON 형태로 사용자 캐시 저장
-- 캐시 우선 조회 후 DB 조회 및 캐싱
+- FastAPI 서버리스 Web Service
+- Render Key‑Value 인스턴스에서 사용자 정보 캐싱 (JSON 형태)
+- 캐시 우선 조회 후 없으면 기본 데이터 생성 혹은 404 응답
 
 ## ⚙️ 시스템 구성
 | 구성 요소       | 역할 |
 |----------------|------|
-| PostgreSQL     | 영속적 데이터 저장 |
-| Redis          | 빠른 조회를 위한 캐시 |
-| FastAPI        | REST API 구현 |
-| PyCharm (Windows) | 개발 환경 |
+| Render Web Service | FastAPI 앱 실행 (무료 웹 서비스, 최대 750시간/月) :contentReference[oaicite:1]{index=1} |
+| Render Key‑Value    | Redis 호환 인메모리 캐시 (무료 인스턴스 제공) :contentReference[oaicite:2]{index=2} |
+| PyCharm (Windows)   | 로컬 개발 환경 (환경 변수, 디버깅 지원) |
 
 ## 📁 프로젝트 구조
 
@@ -19,34 +18,14 @@ fastapi_redis/
 ├── .env
 ├── README.md
 ├── requirements.txt
-├── database.py
-├── models.py
-├── schemas.py
 ├── keyvalue.py
 └── main.py
 
-shell
-복사
-편집
 
-## 🔧 환경설정
+## 🔧 환경변수 설정
 
-### .env 파일 예시
+### `.env` 예시
+REDIS_URL=redis://red-xxxxxxxxxxxx:6379
 
-DATABASE_URL=postgresql://username:password@localhost:5432/mydb
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_DB=0
-
-markdown
-복사
-편집
-
-- PostgreSQL과 Redis 정보를 환경변수로 설정
-- `.env` 파일을 `.gitignore`에 추가하세요!
-
-## 📦 설치 및 실행
-
-```bash
-pip install -r requirements.txt
-uvicorn main:app --reload
+- Render Key‑Value 인스턴스의 **Internal URL** 복사 후 `REDIS_URL` 환경변수에 설정
+- 외부 접속이 필요할 경우 `rediss://` URL 사용하고 IP 화이트리스트를 설정해야 합니다 :contentRe
