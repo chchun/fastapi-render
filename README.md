@@ -1,21 +1,52 @@
-# 📂 FastAPI + PostgreSQL + Render 프로젝트 구조
+# FastAPI + PostgreSQL + Redis (Key‑Value) 예제
 
-```plaintext
-fastapi-render/
-│── 📂 templates/               # 🔹 HTML 템플릿 폴더 (Jinja2 사용)
-│   ├── base.html               # 🔹 기본 레이아웃 파일
-│   ├── form.html               # 🔹 사용자 입력 폼
-│   ├── success.html            # 🔹 입력 성공 페이지
-│
-│── 📂 static/                  # 🔹 정적 파일 (CSS, JS, 이미지 등)
-│   ├── styles.css              # 🔹 기본 스타일 (선택사항)
-│
-│── 📂 models/                  # 🔹 데이터베이스 모델 폴더
-│   ├── user.py                 # 🔹 User 모델 정의 (SQLAlchemy)
-│
-│── database.py                 # 🔹 데이터베이스 연결 및 설정
-│── main.py                     # 🔹 FastAPI 서버 및 API 엔드포인트
-│── requirements.txt            # 🔹 프로젝트 종속 패키지 목록
-│── start.sh                    # 🔹 Render에서 FastAPI 실행 스크립트
-│── .gitignore                  # 🔹 Git에서 제외할 파일 목록
-│── README.md                   # 🔹 프로젝트 설명 파일
+## 🚀 기능
+- PostgreSQL `User` 테이블에 사용자 정보 저장
+- Redis(Key‑Value)에 JSON 형태로 사용자 캐시 저장
+- 캐시 우선 조회 후 DB 조회 및 캐싱
+
+## ⚙️ 시스템 구성
+| 구성 요소       | 역할 |
+|----------------|------|
+| PostgreSQL     | 영속적 데이터 저장 |
+| Redis          | 빠른 조회를 위한 캐시 |
+| FastAPI        | REST API 구현 |
+| PyCharm (Windows) | 개발 환경 |
+
+## 📁 프로젝트 구조
+
+fastapi_redis/
+├── .env
+├── README.md
+├── requirements.txt
+├── database.py
+├── models.py
+├── schemas.py
+├── keyvalue.py
+└── main.py
+
+shell
+복사
+편집
+
+## 🔧 환경설정
+
+### .env 파일 예시
+
+DATABASE_URL=postgresql://username:password@localhost:5432/mydb
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_DB=0
+
+markdown
+복사
+편집
+
+- PostgreSQL과 Redis 정보를 환경변수로 설정
+- `.env` 파일을 `.gitignore`에 추가하세요!
+
+## 📦 설치 및 실행
+
+```bash
+pip install -r requirements.txt
+uvicorn main:app --reload
